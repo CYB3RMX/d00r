@@ -17,29 +17,57 @@ screen='''
              >[By CYB3RMX_]<
 '''
 os.system('clear')
-try:
-     print(yellow)
-     print(screen)
-     print(white)
-     targeturl=str(input("ENTER TARGET URL: "))
-     print("[+] CRAWL STARTS PRESS CTRL+C TO STOP...")
-     wlist=open('crawl.txt','r')
-     valid=[]
-     for i in wlist:
-        print(white)
-        print("-------------------------------------------------")
-        print("[+] TESTING: http://{}/{}".format(targeturl,i))
-        kn0ck='http://{}/{}'.format(targeturl,i)
-        r=requests.get(kn0ck)
-        ret=str(r.status_code)
-        if ret == '404':
-          print("\u001b[91m[*] NOT FOUND: {}".format(kn0ck))
-          print("\u001b[0m-------------------------------------------------")
-        else:
-          print("\u001b[92m[*] FOUND: {}".format(kn0ck))
-          print("\u001b[0m-------------------------------------------------")
-          valid.append(kn0ck)
-except KeyboardInterrupt:
-     print("[*] VALID LOGIN LINKS:")
-     for t in valid:
-        print("\u001b[96m"+t)
+print(yellow)
+print(screen)
+print(white)
+print("[1] HTTP")
+print("[2] HTTPS")
+s0=int(input("CHOOSE: "))
+if s0==1:
+  try:
+       targeturl=str(input("ENTER TARGET URL: "))
+       print("[+] CRAWL STARTS PRESS CTRL+C TO STOP...")
+       wlist=open('crawl.txt','r')
+       valid=[]
+       for i in wlist:
+          print(white)
+          print("-------------------------------------------------")
+          print("[+] TESTING: http://{}/{}".format(targeturl,i))
+          kn0ck='http://{}/{}'.format(targeturl,i)
+          r=requests.get(kn0ck)
+          ret=str(r.status_code)
+          if ret == '404':
+            print("\u001b[91m[*] NOT FOUND: {}".format(kn0ck))
+            print("\u001b[0m-------------------------------------------------")
+          else:
+            print("\u001b[92m[*] FOUND: {}".format(kn0ck))
+            print("\u001b[0m-------------------------------------------------")
+            valid.append(kn0ck)
+  except KeyboardInterrupt:
+       print("[*] VALID LOGIN LINKS:")
+       for t in valid:
+          print("\u001b[96m"+t)
+elif s0==2:
+  try:
+       targeturl=str(input("ENTER TARGET URL: "))
+       print("[+] CRAWL STARTS PRESS CTRL+C TO STOP...")
+       wlist=open('crawl.txt','r')
+       valid=[]
+       for i in wlist:
+          print(white)
+          print("-------------------------------------------------")
+          print("[+] TESTING: https://{}/{}".format(targeturl,i))
+          kn0ck='https://{}/{}'.format(targeturl,i)
+          r=requests.get(kn0ck)
+          ret=str(r.status_code)
+          if ret == '404':
+            print("\u001b[91m[*] NOT FOUND: {}".format(kn0ck))
+            print("\u001b[0m-------------------------------------------------")
+          else:
+            print("\u001b[92m[*] FOUND: {}".format(kn0ck))
+            print("\u001b[0m-------------------------------------------------")
+            valid.append(kn0ck)
+  except KeyboardInterrupt:
+       print("[*] VALID LOGIN LINKS:")
+       for t in valid:
+          print("\u001b[96m"+t)
