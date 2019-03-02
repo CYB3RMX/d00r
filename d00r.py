@@ -22,7 +22,7 @@ try:
      print(screen)
      print(white)
      targeturl=str(input("ENTER TARGET URL: "))
-     print("[+] CRAWL STARTS...")
+     print("[+] CRAWL STARTS PRESS CTRL+C TO STOP...")
      wlist=open('crawl.txt','r')
      valid=[]
      for i in wlist:
