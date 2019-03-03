@@ -48,6 +48,12 @@ if s0==1:
             print("\u001b[92m[*] FOUND: {}".format(kn0ck))
             print("\u001b[0m-------------------------------------------------")
             valid.append(kn0ck)
+       print("[*] VALID LOGIN LINKS:")
+       for t in valid:
+          print("\u001b[96m"+t)
+       print("\u001b[0m[*] FORBIDDEN LINKS:")
+       for f in forb:
+          print("\u001b[95m"+f)
   except KeyboardInterrupt:
        print("[*] VALID LOGIN LINKS:")
        for t in valid:
@@ -80,6 +86,12 @@ elif s0==2:
             print("\u001b[92m[*] FOUND: {}".format(kn0ck))
             print("\u001b[0m-------------------------------------------------")
             valid.append(kn0ck)
+       print("[*] VALID LOGIN LINKS:")
+       for t in valid:
+          print("\u001b[96m"+t)
+       print("\u001b[0m[*] FORBIDDEN LINKS:")
+       for f in forb:
+          print("\u001b[95m"+f)
   except KeyboardInterrupt:
        print("[*] VALID LOGIN LINKS:")
        for t in valid:
