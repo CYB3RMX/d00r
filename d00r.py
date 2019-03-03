@@ -29,6 +29,7 @@ if s0==1:
        print("[+] CRAWL STARTS PRESS CTRL+C TO STOP...")
        wlist=open('crawl.txt','r')
        valid=[]
+       forb=[]
        for i in wlist:
           print(white)
           print("-------------------------------------------------")
@@ -39,6 +40,10 @@ if s0==1:
           if ret == '404':
             print("\u001b[91m[*] NOT FOUND: {}".format(kn0ck))
             print("\u001b[0m-------------------------------------------------")
+          elif ret == '403':
+            print("\u001b[95m[*] FORBIDDEN: {}".format(kn0ck))
+            print("\u001b[0m-------------------------------------------------")
+            forb.append(kn0ck)
           else:
             print("\u001b[92m[*] FOUND: {}".format(kn0ck))
             print("\u001b[0m-------------------------------------------------")
@@ -47,12 +52,16 @@ if s0==1:
        print("[*] VALID LOGIN LINKS:")
        for t in valid:
           print("\u001b[96m"+t)
+       print("\u001b[0m[*] FORBIDDEN LINKS:")
+       for f in forb:
+          print("\u001b[95m"+f)
 elif s0==2:
   try:
        targeturl=str(input("ENTER TARGET URL: "))
        print("[+] CRAWL STARTS PRESS CTRL+C TO STOP...")
        wlist=open('crawl.txt','r')
        valid=[]
+       forb=[]
        for i in wlist:
           print(white)
           print("-------------------------------------------------")
@@ -63,6 +72,10 @@ elif s0==2:
           if ret == '404':
             print("\u001b[91m[*] NOT FOUND: {}".format(kn0ck))
             print("\u001b[0m-------------------------------------------------")
+          elif ret == '403':
+            print("\u001b[95m[*] FORBIDDEN: {}".format(kn0ck))
+            print("\u001b[0m-------------------------------------------------")
+            forb.append(kn0ck)
           else:
             print("\u001b[92m[*] FOUND: {}".format(kn0ck))
             print("\u001b[0m-------------------------------------------------")
@@ -71,3 +84,6 @@ elif s0==2:
        print("[*] VALID LOGIN LINKS:")
        for t in valid:
           print("\u001b[96m"+t)
+       print("\u001b[0m[*] FORBIDDEN LINKS:")
+       for f in forb:
+          print("\u001b[95m"+f)
