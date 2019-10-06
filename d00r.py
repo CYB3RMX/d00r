@@ -26,12 +26,13 @@ s0=int(input("CHOOSE: "))
 if s0==1:
   try:
        targeturl=str(input("ENTER TARGET URL: "))
-       print("[+] CRAWL STARTS PRESS CTRL+C TO STOP...")
        wlist=open('crawl.txt','r')
        valid=[]
        forb=[]
        for i in wlist:
           print(white)
+          os.system("clear")
+          print("[+] PRESS CTRL+C TO STOP...")
           print("-------------------------------------------------")
           print("[+] TESTING: http://{}/{}".format(targeturl,i))
           kn0ck='http://{}/{}'.format(targeturl,i)
@@ -64,12 +65,13 @@ if s0==1:
 elif s0==2:
   try:
        targeturl=str(input("ENTER TARGET URL: "))
-       print("[+] CRAWL STARTS PRESS CTRL+C TO STOP...")
        wlist=open('crawl.txt','r')
        valid=[]
        forb=[]
        for i in wlist:
           print(white)
+          os.system("clear")
+          print("[+] PRESS CTRL+C TO STOP...")
           print("-------------------------------------------------")
           print("[+] TESTING: https://{}/{}".format(targeturl,i))
           kn0ck='https://{}/{}'.format(targeturl,i)
