@@ -1,9 +1,30 @@
 #!/usr/bin/env python
-yellow='\u001b[93m'
 
+# Colors
+yellow = '\033[93m'
+cyan = '\033[96m'
+red = '\033[91m'
+magenta = '\033[95m'
+default = '\033[0m'
+
+# Importing modules and checking missing ones.
 import requests,os,sys
-from tqdm import tqdm
+try:
+    from tqdm import tqdm
+except ImportError:
+    print("Module: tqdm not found please do >>> pip3 install tqdm <<<")
+    sys.exit(1)
 
+# Global variables
+wlist = open('crawl.txt','r').read().split('\n')
+check = ""
+count = 0
+for itera in wlist: # Checking how many words in that list
+    count+=1
+valid_directory = [] # Valid directory list
+forb_directory = [] # Forbidden directory list
+
+# Banner
 screen='''
       _  ___   ___
      | |/ _ \ / _ \\
@@ -20,73 +41,67 @@ os.system('clear')
 print(yellow)
 print(screen)
 
+# Functions
+class d00r:
+    def Outputs():
+        try:
+            if valid_directory == []:
+                print("{}[{}!{}]{} No any valid directories found.".format(cyan,red,cyan,default))
+            else:
+                print("\n{}[{}*{}]{} Valid Directoires (HTTP CODE: 200):".format(cyan,red,cyan,default))
+                print("------------------------------------------------")
+                for valid in valid_directory:
+                    print("{}{}".format(cyan,valid))
+                print("{}------------------------------------------------\n\n".format(default))
+            if forb_directory == []:
+                print("{}[{}!{}]{} No any forbidden directories found.".format(cyan,red,cyan,default))
+            else:
+                print("{}[{}*{}]{} Forbidden Directories (HTTP CODE: 403):".format(cyan,red,cyan,default))
+                print("------------------------------------------------")
+                for forbidden in forb_directory:
+                    print("{}{}".format(magenta,forbidden))
+                print("{}------------------------------------------------".format(default))
+        except KeyboardInterrupt:
+            if valid_directory == []:
+                print("{}[{}!{}]{} No any valid directories found.".format(cyan,red,cyan,default))
+            else:
+                print("\n{}[{}*{}]{} Valid Directories (HTTP CODE: 200):".format(cyan,red,cyan,default))
+                print("------------------------------------------------")
+                for valid in valid_directory:
+                    print("{}{}".format(cyan,t))
+                print("{}------------------------------------------------\n\n".format(default))
+            if forb_directory == []:
+                print("{}[{}!{}]{} No any forbidden links found.".format(cyan,red,cyan,default))
+            else:
+                print("{}[{}*{}]{} Forbidden Directories (HTTP CODE: 403):".format(cyan,red,cyan,default))
+                print("------------------------------------------------")
+                for forbidden in forb_directory:
+                    print("{}{}".format(magenta,f))
+                print("{}------------------------------------------------".format(default))
+    def BruteZone():
+        try:
+            print("\n{}[{}*{}]{} d00r IS CHECKING DIRECTORIES PLEASE WAIT [CTRL+C TO STOP]...".format(cyan,red,cyan,default))
+            for i in tqdm(range(0,count), desc="Testing words"):
+                inject = wlist[i]
+                kn0ck = 'http{}://{}/{}'.format(check,targeturl,inject)
+                response = requests.get(kn0ck)
+                ret = str(response.status_code)
+                if ret == '200':
+                    valid_directory.append(kn0ck)
+                elif ret == '403':
+                    forb_directory.append(kn0ck)
+            d00r.Outputs()
+        except:
+            d00r.Outputs()
 # Menu area
-print("\033[96m[\033[91m1\033[96m]\033[0m HTTP")
-print("\033[96m[\033[91m2\033[96m]\033[0m HTTPS")
 try:
-    select = int(input("\n\033[96m[\033[91m+\033[96m]\033[0m CHOOSE: "))
-except:
-    print("\033[96m[\033[91m!\033[96m]\033[0m Program interrupted.")
-    sys.exit(1)
-# Scanner (brute-force) function
-def Scanner():
-    check = ""
-    count = 0
+    print("{}[{}1{}]{} HTTP".format(cyan,red,cyan,default))
+    print("{}[{}2{}]{} HTTPS".format(cyan,red,cyan,default))
+    select = int(input("\n{}[{}+{}]{} CHOOSE: ".format(cyan,red,cyan,default)))
     if select == 2:
         check = "s" # That is for scanning https
-    try:
-        targeturl = str(input("\033[96m[\033[91m+\033[96m]\033[0m ENTER TARGET URL: "))
-        wlist = open('crawl.txt','r').read().split('\n')
-        for itera in wlist: # Checking how many words in that list
-            count+=1
+    targeturl = str(input("{}[{}+{}]{} ENTER TARGET URL (without http/https): ".format(cyan,red,cyan,default)))
+    d00r.BruteZone()
+except:
+    print("{}[{}!{}]{} Program interrupted.".format(cyan,red,cyan,default))
 
-        valid = [] # Valid links
-        forb = [] # Forbidden links
-
-        print("\n\033[96m[\033[91m*\033[96m]\033[0m d00r IS CHECKING DIRECTORIES PLEASE WAIT [CTRL+C TO STOP]...")
-        for i in tqdm(range(0,count), desc="Testing words"):
-            inject = wlist[i]
-            kn0ck = 'http{}://{}/{}'.format(check,targeturl,inject)
-            r = requests.get(kn0ck)
-            ret = str(r.status_code)
-            if ret == '404':
-                pass
-            elif ret == '403':
-                forb.append(kn0ck)
-            elif ret == '200':
-                valid.append(kn0ck)
-        if valid == []:
-            print("\033[96m[\033[91m!\033[96m]\033[0m No valid links found.")
-        else:
-            print("\n\033[96m[\033[91m*\033[96m]\033[0m VALID LOGIN LINKS:")
-            print("------------------------------------------------")
-            for t in valid:
-                print("\u001b[96m"+t)
-            print("\u001b[0m------------------------------------------------\n\n")
-        if forb == []:
-            print("\033[96m[\033[91m!\033[96m]\033[0m No forbidden links found.")
-        else:
-            print("\033[96m[\033[91m*\033[96m]\033[0m FORBIDDEN LINKS:")
-            print("------------------------------------------------")
-            for f in forb:
-                print("\u001b[95m"+f)
-            print("\u001b[0m------------------------------------------------")
-    except KeyboardInterrupt:
-        if valid == []:
-            print("\033[96m[\033[91m!\033[96m]\033[0m No valid links found. ")
-        else:
-            print("\n\033[96m[\033[91m*\033[96m]\033[0m VALID LOGIN LINKS:")
-            print("------------------------------------------------")
-            for t in valid:
-                print("\u001b[96m"+t)
-            print("\u001b[0m------------------------------------------------\n\n")
-        if forb == []:
-            print("\033[96m[\033[91m!\033[96m]\033[0m No forbidden links found.")
-        else:
-            print("\033[96m[\033[91m*\033[96m]\033[0m FORBIDDEN LINKS:")
-            print("------------------------------------------------")
-            for f in forb:
-                print("\u001b[95m"+f)
-            print("\u001b[0m------------------------------------------------")
-if __name__ == '__main__':
-    Scanner()
