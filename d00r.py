@@ -101,11 +101,8 @@ try:
         print("{}[{}1{}]{} HTTP".format(cyan,red,cyan,default))
         print("{}[{}2{}]{} HTTPS".format(cyan,red,cyan,default))
         select = int(input("\n{}[{}+{}]{} CHOOSE: ".format(cyan,red,cyan,default)))
-    print("https" in targeturl)
-    if "https" in targeturl: 
-        check = "s"
-    if select == 2:
-        check = "s"
+    if select == 2 or "https" in targeturl:
+        check = "s" 
     d00r.BruteZone()
 except:
     print("{}[{}!{}]{} Program interrupted.".format(cyan,red,cyan,default))
