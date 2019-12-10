@@ -83,7 +83,7 @@ class d00r:
             print("\n{}[{}*{}]{} d00r IS CHECKING DIRECTORIES PLEASE WAIT [CTRL+C TO STOP]...".format(cyan,red,cyan,default))
             for i in tqdm(range(0,count), desc="Testing words"):
                 inject = wlist[i]
-                kn0ck = 'http{}://{}/{}'.format(check,targeturl,inject)
+                kn0ck = 'http{}://{}/{}'.format(check,targeturl.replace("http://","").replace("https://",""),inject)
                 response = requests.get(kn0ck)
                 ret = str(response.status_code)
                 if ret == '200':
@@ -95,12 +95,17 @@ class d00r:
             d00r.Outputs()
 # Menu area
 try:
-    print("{}[{}1{}]{} HTTP".format(cyan,red,cyan,default))
-    print("{}[{}2{}]{} HTTPS".format(cyan,red,cyan,default))
-    select = int(input("\n{}[{}+{}]{} CHOOSE: ".format(cyan,red,cyan,default)))
+    select = 0
+    targeturl = str(input("{}[{}+{}]{} ENTER TARGET URL: ".format(cyan,red,cyan,default)))
+    if "http" not in targeturl:
+        print("{}[{}1{}]{} HTTP".format(cyan,red,cyan,default))
+        print("{}[{}2{}]{} HTTPS".format(cyan,red,cyan,default))
+        select = int(input("\n{}[{}+{}]{} CHOOSE: ".format(cyan,red,cyan,default)))
+    print("https" in targeturl)
+    if "https" in targeturl: 
+        check = "s"
     if select == 2:
-        check = "s" # That is for scanning https
-    targeturl = str(input("{}[{}+{}]{} ENTER TARGET URL (without http/https): ".format(cyan,red,cyan,default)))
+        check = "s"
     d00r.BruteZone()
 except:
     print("{}[{}!{}]{} Program interrupted.".format(cyan,red,cyan,default))
