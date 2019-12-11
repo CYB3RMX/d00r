@@ -9,6 +9,7 @@ default = '\033[0m'
 
 # Importing modules and checking missing ones.
 import requests,os,sys
+import argparse
 try:
     from tqdm import tqdm
 except ImportError:
@@ -16,7 +17,11 @@ except ImportError:
     sys.exit(1)
 
 # Global variables
-wlist = open('crawl.txt','r').read().split('\n')
+parser = argparse.ArgumentParser()
+parser.add_argument("-w", "--wordlist",required=True,help="Define a wordlist with -w")
+parser.add_argument("-u", "--url",required=False,help="Define an url -u")
+args = parser.parse_args()
+wlist = open(args.wordlist,'r').read().split('\n')
 check = ""
 count = 0
 for itera in wlist: # Checking how many words in that list
@@ -96,7 +101,10 @@ class d00r:
 # Menu area
 try:
     select = 0
-    targeturl = str(input("{}[{}+{}]{} ENTER TARGET URL: ".format(cyan,red,cyan,default)))
+    if not args.url:
+        targeturl = str(input("{}[{}+{}]{} ENTER TARGET URL: ".format(cyan,red,cyan,default)))
+    else:
+        targeturl = args.url
     if "http" not in targeturl:
         print("{}[{}1{}]{} HTTP".format(cyan,red,cyan,default))
         print("{}[{}2{}]{} HTTPS".format(cyan,red,cyan,default))
