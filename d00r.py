@@ -1,16 +1,22 @@
-#!/usr/bin/env python
-yellow='\u001b[93m'
+#!/usr/bin/env python3
 
-import requests,os,sys
+# Configuring color variables
+yellow='\u001b[93m'
+cyan = '\u001b[96m'
+red = '\u001b[91m'
+white = '\u001b[0m'
+
+import requests,os,sys,argparse
 from tqdm import tqdm
 
+# Banner
 screen='''
       _  ___   ___
      | |/ _ \ / _ \\
    __| | | | | | | |_ __
   / _` | | | | | | | '__|
  | (_| | |_| | |_| | |
-  \__,_|\___/ \___/|_|    v1.0
+  \__,_|\___/ \___/|_|    v1.2
 
   >> Attention s0me0n3 kn0ck th3 d00r !!
 
@@ -20,34 +26,42 @@ os.system('clear')
 print(yellow)
 print(screen)
 
-# Menu area
-print("\033[96m[\033[91m1\033[96m]\033[0m HTTP")
-print("\033[96m[\033[91m2\033[96m]\033[0m HTTPS")
-try:
-    select = int(input("\n\033[96m[\033[91m+\033[96m]\033[0m CHOOSE: "))
-except:
-    print("\033[96m[\033[91m!\033[96m]\033[0m Program terminated.")
-    sys.exit(1)
 # Scanner (brute-force) function
 def Scanner():
-    check = ""
-    count = 0
-    if select == 2:
-        check = "s" # That is for scanning https
+    # Creating arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-u", "--url", required=False, help="Enter a target url.")
+    parser.add_argument("-w", "--wordlist", required=False, help="Select a wordlist.")
+    parser.add_argument("--install", required=False, help="Install d00r on your system.", action="store_true")
+    args = parser.parse_args()
+    if args.install:
+        if os.getuid() != 0:
+            print("{}[{}!{}]{} Use this argument with root privileges.".format(cyan,red,cyan,white))
+        else:
+            command = "cp d00r.py d00r; chmod +x d00r; sudo mv d00r /usr/bin/"
+            os.system(command)
     try:
-        targeturl = str(input("\033[96m[\033[91m+\033[96m]\033[0m Enter target url (without http or https!): "))
-        words = str(input("\033[96m[\033[91m+\033[96m]\033[0m Enter wordlist file: "))
-        wlist = open(words,'r').read().split('\n')
+        # Using the arguments
+        targeturl = str(args.url)
+        try:
+           wlist = open(args.wordlist,'r').read().split('\n')
+        except:
+           print("{}[{}!{}]{} Please use -h to see available arguments".format(cyan,red,cyan,white))
+           sys.exit(1)
+        count=0
         for itera in wlist: # Checking how many words in that list
             count+=1
 
-        valid = [] # Valid links
-        forb = [] # Forbidden links
+        valid = [] # Valid links HTTP CODE: 200
+        forb = [] # Forbidden links HTTP CODE: 403
 
-        print("\n\033[96m[\033[91m*\033[96m]\033[0m d00r IS CHECKING DIRECTORIES PLEASE WAIT [CTRL+C TO STOP]...")
+        # Brute-force zone
+        print("{}[{}*{}]{} Target URL: {}".format(cyan,red,cyan,white,targeturl))
+        print("{}[{}*{}]{} Wordlist: {}".format(cyan,red,cyan,white,args.wordlist))
+        print("\n{}[{}*{}]{} d00r IS CHECKING DIRECTORIES PLEASE WAIT [CTRL+C TO STOP]...".format(cyan,red,cyan,white))
         for i in tqdm(range(0,count), desc="Testing words"):
             inject = wlist[i]
-            kn0ck = 'http{}://{}/{}'.format(check,targeturl,inject)
+            kn0ck = '{}/{}'.format(targeturl,inject)
             r = requests.get(kn0ck)
             ret = str(r.status_code)
             if ret == '404':
@@ -59,35 +73,35 @@ def Scanner():
         if valid == []:
             pass
         else:
-            print("\n\033[96m[\033[91m*\033[96m]\033[0m VALID LOGIN LINKS (HTTP CODE: 200):")
+            print("\n{}[{}+{}]{} VALID LOGIN LINKS (HTTP CODE: 200):".format(cyan,red,cyan,white))
             print("------------------------------------------------")
             for t in valid:
                 print("\u001b[96m"+t)
-            print("\u001b[0m------------------------------------------------\n\n")
+            print("{}------------------------------------------------\n\n".format(white))
         if forb == []:
             pass
         else:
-            print("\033[96m[\033[91m*\033[96m]\033[0m FORBIDDEN LINKS (HTTP CODE: 403):")
+            print("{}[{}+{}]{} FORBIDDEN LINKS (HTTP CODE: 403):".format(cyan,red,cyan,white))
             print("------------------------------------------------")
             for f in forb:
                 print("\u001b[95m"+f)
-            print("\u001b[0m------------------------------------------------")
+            print("{}------------------------------------------------".format(white))
     except KeyboardInterrupt:
         if valid == []:
             pass
         else:
-            print("\n\033[96m[\033[91m*\033[96m]\033[0m VALID LOGIN LINKS:")
+            print("\n{}[{}+{}]{} VALID LOGIN LINKS:".format(cyan,red,cyan,white))
             print("------------------------------------------------")
             for t in valid:
                 print("\u001b[96m"+t)
-            print("\u001b[0m------------------------------------------------\n\n")
+            print("{}------------------------------------------------\n\n".format(white))
         if forb == []:
             pass
         else:
-            print("\033[96m[\033[91m*\033[96m]\033[0m FORBIDDEN LINKS:")
+            print("{}[{}+{}]{} FORBIDDEN LINKS:".format(cyan,red,cyan,white))
             print("------------------------------------------------")
             for f in forb:
                 print("\u001b[95m"+f)
-            print("\u001b[0m------------------------------------------------")
+            print("{}------------------------------------------------".format(white))
 if __name__ == '__main__':
     Scanner()
