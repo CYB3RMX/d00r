@@ -10,7 +10,7 @@ screen='''
    __| | | | | | | |_ __
   / _` | | | | | | | '__|
  | (_| | |_| | |_| | |
-  \__,_|\___/ \___/|_|
+  \__,_|\___/ \___/|_|    v1.0
 
   >> Attention s0me0n3 kn0ck th3 d00r !!
 
@@ -26,7 +26,7 @@ print("\033[96m[\033[91m2\033[96m]\033[0m HTTPS")
 try:
     select = int(input("\n\033[96m[\033[91m+\033[96m]\033[0m CHOOSE: "))
 except:
-    print("\033[96m[\033[91m!\033[96m]\033[0m Program interrupted.")
+    print("\033[96m[\033[91m!\033[96m]\033[0m Program terminated.")
     sys.exit(1)
 # Scanner (brute-force) function
 def Scanner():
@@ -56,24 +56,24 @@ def Scanner():
             elif ret == '200':
                 valid.append(kn0ck)
         if valid == []:
-            print("\033[96m[\033[91m!\033[96m]\033[0m No valid links found.")
+            pass
         else:
-            print("\n\033[96m[\033[91m*\033[96m]\033[0m VALID LOGIN LINKS:")
+            print("\n\033[96m[\033[91m*\033[96m]\033[0m VALID LOGIN LINKS (HTTP CODE: 200):")
             print("------------------------------------------------")
             for t in valid:
                 print("\u001b[96m"+t)
             print("\u001b[0m------------------------------------------------\n\n")
         if forb == []:
-            print("\033[96m[\033[91m!\033[96m]\033[0m No forbidden links found.")
+            pass
         else:
-            print("\033[96m[\033[91m*\033[96m]\033[0m FORBIDDEN LINKS:")
+            print("\033[96m[\033[91m*\033[96m]\033[0m FORBIDDEN LINKS (HTTP CODE: 403):")
             print("------------------------------------------------")
             for f in forb:
                 print("\u001b[95m"+f)
             print("\u001b[0m------------------------------------------------")
     except KeyboardInterrupt:
         if valid == []:
-            print("\033[96m[\033[91m!\033[96m]\033[0m No valid links found. ")
+            pass
         else:
             print("\n\033[96m[\033[91m*\033[96m]\033[0m VALID LOGIN LINKS:")
             print("------------------------------------------------")
@@ -81,7 +81,7 @@ def Scanner():
                 print("\u001b[96m"+t)
             print("\u001b[0m------------------------------------------------\n\n")
         if forb == []:
-            print("\033[96m[\033[91m!\033[96m]\033[0m No forbidden links found.")
+            pass
         else:
             print("\033[96m[\033[91m*\033[96m]\033[0m FORBIDDEN LINKS:")
             print("------------------------------------------------")
