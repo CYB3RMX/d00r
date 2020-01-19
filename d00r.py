@@ -35,8 +35,9 @@ def Scanner():
     if select == 2:
         check = "s" # That is for scanning https
     try:
-        targeturl = str(input("\033[96m[\033[91m+\033[96m]\033[0m ENTER TARGET URL: "))
-        wlist = open('crawl.txt','r').read().split('\n')
+        targeturl = str(input("\033[96m[\033[91m+\033[96m]\033[0m Enter target url (without http or https!): "))
+        words = str(input("\033[96m[\033[91m+\033[96m]\033[0m Enter wordlist file: "))
+        wlist = open(words,'r').read().split('\n')
         for itera in wlist: # Checking how many words in that list
             count+=1
 
