@@ -1,4 +1,5 @@
 # d00r
-Admin and normal login page hunter tool...
+Directory brute-force tool written with python
 
-*NEW 06/10/2019 03:05* Bug fixes...
+<b>-----Usage-----<b>
+- python3 d00r.py
