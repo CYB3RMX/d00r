@@ -8,3 +8,6 @@ Directory brute-force tool written with python.
 - -u: Specify target url.
 - -w: Select wordlist file.
 - --install: Install d00r on your system.
+
+### Updates
+- 23/06/2020: Bug fixes.
