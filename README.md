@@ -8,6 +8,10 @@
 # Screenshot
 ![Usage](.animations/Screenshot.png)
 
+# Setup
+<b>Necessary python modules</b>: ```tqdm```, ```prettytable``` and ```argparse```<br>
+<b>Installation of python modules</b>: ```pip3 install -r requirements.txt```<br>
+
 # Arguments  
 - --url: Specify target url. Example => http://192.168.1.1
 - --wordlist: Select wordlist file. Exaple => /usr/share/wordlists/dirb/common.txt
