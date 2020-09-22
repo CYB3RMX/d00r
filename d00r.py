@@ -44,12 +44,12 @@ parser.add_argument("--status", required=False, nargs='+', help="Filter status c
 parser.add_argument("--install", required=False, help="Install d00r on your system.", action="store_true")
 args = parser.parse_args()
 
-# Valid links
-urlAndCode = PrettyTable()
-urlAndCode.field_names = [f"{green}URL{white}", f"{green}Status Code{white}"]
-
 # Scanner (brute-force) function
 def Scanner():
+    # Valid links
+    urlAndCode = PrettyTable()
+    urlAndCode.field_names = [f"{green}URL{white}", f"{green}Status Code{white}"]
+
     if args.install:
         if os.getuid() != 0:
             print(f"{cyan}[{red}!{cyan}]{white} Use this argument with root privileges.")
@@ -84,15 +84,10 @@ def Scanner():
                 urlAndCode.add_row([kn0ck, ret])
         
         # Printing zone
-        if urlAndCode != []:
-            print(urlAndCode)
-        else:
-            print(f"{cyan}[{red}!{cyan}]{white} Not any valid links found. Try another wordlist.")
-            
+        print(urlAndCode)
     except KeyboardInterrupt:
         print(f"\n{cyan}[{red}!{cyan}]{white} Program terminated by user.")
-        if urlAndCode != []:
-            print(urlAndCode)
+        print(urlAndCode)
 
 # Execution
 Scanner()
