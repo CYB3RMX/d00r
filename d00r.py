@@ -84,11 +84,14 @@ def Scanner():
                 urlAndCode.add_row([kn0ck, ret])
         
         # Printing zone
-        if urlAndCode != "":
+        if urlAndCode != []:
             print(urlAndCode)
+        else:
+            print(f"{cyan}[{red}!{cyan}]{white} Not any valid links found. Try another wordlist.")
+            
     except KeyboardInterrupt:
         print(f"\n{cyan}[{red}!{cyan}]{white} Program terminated by user.")
-        if urlAndCode != "":
+        if urlAndCode != []:
             print(urlAndCode)
 
 # Execution
