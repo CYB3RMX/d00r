@@ -79,7 +79,7 @@ def Scanner():
             inject = wlist[i]
             kn0ck = '{}/{}'.format(targeturl,inject)
             r = requests.get(kn0ck)
-            ret = str(r.status_code)
+            ret = f'{r.status_code}'
             if ret in args.status:
                 urlAndCode.add_row([kn0ck, ret])
         
