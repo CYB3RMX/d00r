@@ -1,13 +1,18 @@
 # d00r
-Directory brute-force tool written with python.
+<img src="https://img.shields.io/badge/-Linux-black?style=for-the-badge&logo=Linux&logoColor=white"> <img src="https://img.shields.io/badge/-Python-black?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/-Terminal-black?style=for-the-badge&logo=GNU%20Bash&logoColor=white">
+<br>Simple directory brute-force tool written with python.<br>
 
-- Usage before install: ```python3 d00r -u [url] -w [wordlist_file]```
-- Usage after install: ```d00r -u [url] -w [wordlist_file]```
+- [X] Usage before install: ```python3 d00r --url [url] --wordlist [wordlist_file] --status 2xx 3xx```
+- [X] Usage after install: ```d00r --url [url] --wordlist [wordlist_file] --status 2xx 3xx```
 
-### Arguments  
-- -u: Specify target url.
-- -w: Select wordlist file.
+# Screenshot
+![Usage](.animations/Screenshot.png)
+
+# Arguments  
+- --url: Specify target url. Example => http://192.168.1.1
+- --wordlist: Select wordlist file. Exaple => /usr/share/wordlists/dirb/common.txt
+- --status: Filter status codes. Example => 200 301 403
 - --install: Install d00r on your system.
 
-### Updates
-- 23/06/2020: Bug fixes.
+# Updates
+- [X] 22/09/2020: Added ```--status``` argument.
