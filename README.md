@@ -14,7 +14,7 @@
 
 # Arguments  
 - --url: Specify target url. Example => http://192.168.1.1
-- --wordlist: Select wordlist file. Exaple => /usr/share/wordlists/dirb/common.txt
+- --wordlist: Select wordlist file. Example => /usr/share/wordlists/dirb/common.txt
 - --status: Filter status codes. Example => 200 301 403
 - --install: Install d00r on your system.
 
