@@ -16,7 +16,8 @@
 - --url: Specify target url. Example => http://192.168.1.1
 - --wordlist: Select wordlist file. Example => /usr/share/wordlists/dirb/common.txt
 - --status: Filter status codes. Example => 200 301 403
+- --thread: Number of threads. Example => 100
 - --install: Install d00r on your system.
 
 # Updates
-- [X] 22/09/2020: Added ```--status``` argument.
+- [X] 06/09/2020: Added thread support.

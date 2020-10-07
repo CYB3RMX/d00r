@@ -6,6 +6,7 @@ cyan = '\u001b[1;96m'
 red = '\u001b[1;91m'
 green = '\u001b[1;92m'
 white = '\u001b[1;37;40m'
+
 thread_num = 1
 hits = []
 import requests, os, sys, argparse, threading, queue
@@ -15,11 +16,6 @@ except:
     print("Missing modules: tqdm")
     sys.exit(1)
 
-try:
-    from prettytable import PrettyTable
-except:
-    print("Missing modules: prettytable")
-    sys.exit(1)
 screen='''
       _  ___   ___
      | |/ _ \ / _ \\
@@ -44,9 +40,6 @@ parser.add_argument("--install", required=False, help="Install d00r on your syst
 parser.add_argument("--thread", required=False, help="How many thread do you want ?")
 args = parser.parse_args()
 global q
-# Valid links
-urlAndCode = PrettyTable()
-urlAndCode.field_names = [f"{green}URL{white}", f"{green}Status Code{white}"]
 
 if args.install:
     if os.getuid() != 0:
@@ -64,12 +57,15 @@ try:
 except:
     print(f"{cyan}[{red}!{cyan}]{white} Please use -h to see available arguments")
     sys.exit(1)
+
 # Checking how many words in that list and putting in queue
 count=0
 q = queue.Queue()
 for w in wlist:
     q.put(w)
     count+=1 
+
+# Outputs
 print(f"{cyan}[{red}*{cyan}]{white} Target URL: {targeturl}")
 print(f"{cyan}[{red}*{cyan}]{white} Wordlist: {args.wordlist}")
 print(f"{cyan}[{red}*{cyan}]{white} Status Codes: {args.status}")
@@ -86,12 +82,13 @@ def scanner():
             r = requests.get(kn0ck)
             ret = f'{r.status_code}'           
             if ret in args.status:
-                print(f"{green}Status {ret} => {kn0ck}")
+                print(f"Status {green}{ret}{white} => {green}{kn0ck}{white}")
                 hits.append((kn0ck,ret))
 
     except KeyboardInterrupt:
         print(f"\n{cyan}[{red}!{cyan}]{white} Program terminated by user.")
 
+# Handling threads
 ts = []
 for i in range(0,thread_num):
     try:
