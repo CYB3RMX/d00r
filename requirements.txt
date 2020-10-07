@@ -1,3 +1,2 @@
 tqdm
-prettytable
 argparse

@@ -9,7 +9,7 @@
 ![Usage](.animations/Screenshot.png)
 
 # Setup
-<b>Necessary python modules</b>: ```tqdm```, ```prettytable``` and ```argparse```<br>
+<b>Necessary python modules</b>: ```tqdm``` and ```argparse```<br>
 <b>Installation of python modules</b>: ```pip3 install -r requirements.txt```<br>
 
 # Arguments  
