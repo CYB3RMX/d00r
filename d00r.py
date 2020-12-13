@@ -7,7 +7,7 @@ red = '\u001b[1;91m'
 green = '\u001b[1;92m'
 white = '\u001b[1;37;40m'
 
-thread_num = 1
+thread_num = 1 # Number of threads
 hits = []
 import requests, os, sys, argparse, threading, queue
 try:
@@ -30,7 +30,7 @@ screen='''
 '''
 print(f"{yellow}{screen}{white}")
 
-# Creating parsing and handlig arguments
+# Parsing and handlig arguments
 args = []
 parser = argparse.ArgumentParser()
 parser.add_argument("--url", required=False, help="Enter a target url.")
