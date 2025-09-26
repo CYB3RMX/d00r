@@ -49,9 +49,7 @@ parser.add_argument("--thread", required=False, help="How many thread do you wan
 args = parser.parse_args()
 
 if args.install:
-    system = platform.system()
-
-    if system == "Windows":
+    if platform.system() == "Windows":
         user_bin = os.path.join(os.environ["USERPROFILE"], "bin")
         os.makedirs(user_bin, exist_ok=True)
 
@@ -71,11 +69,6 @@ if args.install:
             os.system(command)
             print(f"{cyan}[+]{white} Installed! Now you can run {red}d00r{white} from any terminal.")
 
-
-
-if args.thread is not None:
-    # global thread_num
-    thread_num = int(args.thread)
 
 if args.thread is not None:
     thread_num = int(args.thread)
