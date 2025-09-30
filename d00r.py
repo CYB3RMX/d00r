@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+import os
+import sys
+import platform
+import argparse
+import requests
+import queue
+import threading
+
 # Configuring color variables
 yellow='\u001b[1;93m'
 cyan = '\u001b[1;96m'
@@ -9,14 +17,14 @@ white = '\u001b[1;37;40m'
 
 thread_num = 1 # Number of threads
 hits = []
-import requests, os, sys, argparse, threading, queue
+
 try:
     from tqdm import tqdm
 except:
     print("Missing modules: tqdm")
     sys.exit(1)
 
-screen='''
+screen=r'''
       _  ___   ___
      | |/ _ \ / _ \\
    __| | | | | | | |_ __
@@ -39,16 +47,31 @@ parser.add_argument("--status", required=False, nargs='+', help="Filter status c
 parser.add_argument("--install", required=False, help="Install d00r on your system.", action="store_true")
 parser.add_argument("--thread", required=False, help="How many thread do you want ?")
 args = parser.parse_args()
-global q
 
 if args.install:
-    if os.getuid() != 0:
-        print(f"{cyan}[{red}!{cyan}]{white} Use this argument with root privileges.")
+    if platform.system() == "Windows":
+        user_bin = os.path.join(os.environ["USERPROFILE"], "bin")
+        os.makedirs(user_bin, exist_ok=True)
+
+        bat_path = os.path.join(user_bin, "d00r.bat")
+        script_path = os.path.abspath(__file__)
+
+        with open(bat_path, "w") as f:
+            f.write(f'@echo off\npython "{script_path}" %*\n')
+
+        print(f"{cyan}[+]{white} Installed! Make sure {user_bin} is in your PATH.")
+
     else:
-        command = "cp d00r.py d00r; chmod +x d00r; sudo mv d00r /usr/bin/"
-        os.system(command)
+        if not hasattr(os, "getuid") or os.getuid() != 0:
+            print(f"{cyan}[{red}!{cyan}]{white} Use this argument with root privileges.")
+        else:
+            command = "cp d00r.py d00r; chmod +x d00r; mv d00r /usr/bin/"
+            os.system(command)
+            print(f"{cyan}[+]{white} Installed! Now you can run {red}d00r{white} from any terminal.")
+
+
 if args.thread is not None:
-        thread_num = int(args.thread)
+    thread_num = int(args.thread)
 
 # Using the arguments
 targeturl = str(args.url)
